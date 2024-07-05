@@ -13,11 +13,20 @@ public:
 	int radius;
 };
 
+class Paddle {
+public:
+	Vector2 position;
+	int height;
+	int width;
+};
+
 Ball ball;
+Paddle paddle;
 
 void InitGame();
 void DrawGame();
 void DrawBall(int size, Color color);
+void DrawPaddle(Color color);
 void MoveBall(int speed);
 void BallCollision();
 
@@ -47,13 +56,18 @@ void InitGame()
 {
 	ball.position = Vector2{ screenWidth / 2, screenHeight / 2 };
 	ball.velocity = Vector2{ 0.5, 0.5 };
-	ball.radius = 20;
+	ball.radius = 12;
+
+	paddle.height = 100;
+	paddle.width = 20;
+	paddle.position = Vector2{ 50, (screenHeight / 2) };
 }
 
 void DrawGame()
 {
 	ClearBackground(RAYWHITE);
-	DrawBall(20, LIGHTGRAY);
+	DrawBall(ball.radius, LIGHTGRAY);
+	DrawPaddle(LIGHTGRAY);
 }
 
 void DrawBall(int size, Color color)
@@ -85,5 +99,10 @@ void BallCollision()
 		ball.velocity.x = cos(ball.angle);
 		ball.velocity.y = -sin(ball.angle);
 	}
+}
+
+void DrawPaddle(Color color)
+{
+	DrawRectangle(paddle.position.x, paddle.position.y, paddle.width, paddle.height, color);
 }
 
