@@ -59,14 +59,14 @@ void DrawGame()
 void DrawBall(int size, Color color)
 {
 	DrawCircle(ball.position.x, ball.position.y, size, color);
-	MoveBall(5);
 	BallCollision();
+	MoveBall(500);
 }
 
 void MoveBall(int speed)
 {
-	ball.position.x += ball.velocity.x * speed;
-	ball.position.y += ball.velocity.y * speed;
+	ball.position.x += ball.velocity.x * speed * GetFrameTime();
+	ball.position.y += ball.velocity.y * speed * GetFrameTime();
 }
 
 void BallCollision()
